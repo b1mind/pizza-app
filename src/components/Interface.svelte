@@ -40,7 +40,7 @@
     gsap.to(toppings.children, { duration: 1, scale: 1 })
 
     Draggable.create(toppings.children, {
-      bounds: document.querySelector('[data-viewBox]'),
+      bounds: document.querySelector('[data-pizzaBox]'),
 
       onDrag: function (e) {
         checkHit(this)
@@ -61,22 +61,23 @@
   }
 </script>
 
-<svg data-viewBox fill="none" viewBox="0 0 360 640" xmlns="http://www.w3.org/2000/svg">
-  <path fill="#C4C4C4" d="M0 0h360v60H0z" />
-  <path fill="#C4C4C4" d="M0 455h360v185H0z" />
+<div class="grid">
+  <svg data-pizzaBox fill="none" viewBox="0 0 360 640" xmlns="http://www.w3.org/2000/svg">
+    <path fill="#C4C4C4" d="M0 0h360v60H0z" />
+    <path fill="#C4C4C4" d="M0 455h360v185H0z" />
 
-  <g data-next on:click={addToppings}>
-    <path fill="#D3FF77" d="M343 30.5a22.5 22.5 0 11-45 0 22.5 22.5 0 0145 0z" />
-    <path
-      fill="#000"
-      d="M306.55 28.5a2 2 0 100 4v-4zm28.41 3.41a2 2 0 000-2.82l-12.72-12.73a2 2 0 10-2.83 2.83l11.31 11.31-11.31 11.31a2 2 0 002.83 2.83l12.72-12.73zm-28.41.59h27v-4h-27v4z" />
-  </g>
+    <g data-next on:click={addToppings}>
+      <path fill="#D3FF77" d="M343 30.5a22.5 22.5 0 11-45 0 22.5 22.5 0 0145 0z" />
+      <path
+        fill="#000"
+        d="M306.55 28.5a2 2 0 100 4v-4zm28.41 3.41a2 2 0 000-2.82l-12.72-12.73a2 2 0 10-2.83 2.83l11.31 11.31-11.31 11.31a2 2 0 002.83 2.83l12.72-12.73zm-28.41.59h27v-4h-27v4z" />
+    </g>
 
-  <g bind:this={pizza}>
-    <circle data-pizza cx="180" cy="251" r="75" fill="#C4C4C4" />
-  </g>
+    <g bind:this={pizza}>
+      <circle data-pizza cx="180" cy="251" r="75" fill="#C4C4C4" />
+    </g>
 
-  <g data-toppings fill="#D3FF77" bind:this={toppings}>
+    <!--   <g data-toppings fill="#D3FF77" bind:this={toppings}>
     <path data-topping="pepper" d="M30 483h50v50H30z" />
     <path d="M30 569h50v50H30z" />
     <path d="M116 483h50v50h-50z" />
@@ -85,15 +86,15 @@
     <path d="M201 569h50v50h-50z" />
     <path d="M286 483h50v50h-50z" />
     <path d="M286 569h50v50h-50z" />
-  </g>
+  </g> -->
 
-  <g class="sizes" on:click={resizePizza}>
-    <circle data-size="12" cx="66" cy="552" r="30" />
-    <circle data-size="15" cx="158.5" cy="551.5" r="40" />
-    <circle data-size="20" cx="276" cy="547" r="50" />
-  </g>
+    <g class="sizes" on:click={resizePizza}>
+      <circle data-size="12" cx="66" cy="552" r="30" />
+      <circle data-size="15" cx="158.5" cy="551.5" r="40" />
+      <circle data-size="20" cx="276" cy="547" r="50" />
+    </g>
 
-  <!-- <g class="sizes-text">
+    <!-- <g class="sizes-text">
     <path
       d="M61.27 558h-1.09v-7.23l-2.18.8v-.98l3.1-1.16h.17V558zm8.77 0h-5.6v-.78l2.96-3.28c.44-.5.74-.9.9-1.2.17-.32.25-.64.25-.97 0-.45-.13-.81-.4-1.1a1.41 1.41 0 00-1.08-.43c-.54 0-.96.16-1.26.47-.3.3-.44.73-.44 1.27h-1.09c0-.78.26-1.42.76-1.9.5-.49 1.18-.73 2.03-.73.8 0 1.42.21 1.88.63.46.41.7.97.7 1.66 0 .84-.54 1.84-1.61 3l-2.29 2.48h4.29v.88zm1.4-6.13l-.61-.42c.36-.5.55-1.04.56-1.6V549h1.07v.76c0 .4-.1.78-.29 1.17-.19.39-.43.7-.73.94zm1.8 0l-.61-.42c.36-.5.55-1.04.56-1.6V549h1.07v.76c0 .4-.1.78-.3 1.17-.18.39-.42.7-.72.94z" />
     <path
@@ -101,11 +102,54 @@
     <path
       d="M273.3 554h-5.6v-.78l2.96-3.28c.44-.5.74-.9.9-1.2.17-.32.26-.64.26-.97 0-.45-.14-.81-.4-1.1a1.41 1.41 0 00-1.09-.43c-.53 0-.95.16-1.26.47-.3.3-.44.73-.44 1.27h-1.08c0-.78.25-1.42.75-1.9.5-.49 1.19-.73 2.03-.73.8 0 1.42.21 1.88.63.47.41.7.97.7 1.66 0 .84-.54 1.84-1.6 3l-2.3 2.48h4.29v.88zm6.5-3.64c0 1.27-.22 2.21-.65 2.83-.44.62-1.11.93-2.04.93-.9 0-1.58-.3-2.02-.9-.44-.61-.66-1.51-.68-2.71v-1.45c0-1.25.22-2.18.65-2.8.44-.6 1.12-.9 2.04-.9.92 0 1.6.29 2.03.88.43.58.66 1.49.67 2.72v1.4zm-1.09-1.48c0-.92-.13-1.59-.38-2-.26-.43-.67-.64-1.23-.64-.55 0-.96.21-1.21.63a3.88 3.88 0 00-.4 1.93v1.73c0 .92.14 1.6.4 2.05.27.43.68.65 1.22.65.54 0 .94-.2 1.2-.62.25-.41.4-1.07.4-1.96v-1.77zm2.73-1l-.61-.43c.36-.5.55-1.04.56-1.6V545h1.07v.76c0 .4-.1.78-.29 1.17-.19.39-.43.7-.73.94zm1.8 0l-.61-.43c.36-.5.55-1.04.56-1.6V545h1.07v.76c0 .4-.1.78-.3 1.17-.18.39-.42.7-.72.94z" />
   </g> -->
-</svg>
+  </svg>
+
+  <div data-toppings bind:this={toppings}>
+    <svg data-orderBox fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="50" height="50" fill="#D3FF77" />
+    </svg>
+  </div>
+  <!-- <svg data-orderBox viewBox="0 0 306 136" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g data-toppings fill="#D3FF77">
+      <rect width="50" height="50" fill="#D3FF77" />
+      <rect y="86" width="50" height="50" fill="#D3FF77" />
+      <rect x="86" width="50" height="50" fill="#D3FF77" />
+      <rect x="86" y="86" width="50" height="50" fill="#D3FF77" />
+      <rect x="171" width="50" height="50" fill="#D3FF77" />
+      <rect x="171" y="86" width="50" height="50" fill="#D3FF77" />
+      <rect x="256" width="50" height="50" fill="#D3FF77" />
+      <rect x="256" y="86" width="50" height="50" fill="#D3FF77" />
+    </g>
+  </svg> -->
+</div>
 
 <style type="text/scss">
-  svg {
+  .grid {
     max-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr minmax(360px, 500px) 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  [data-pizzaBox] {
+    // max-height: 100vh;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+
+  [data-orderBox] {
+    width: 50px;
+    height: 50px;
+  }
+
+  [data-toppings] {
+    display: grid;
+    grid-row: 2;
+    grid-column: 2;
+  }
+
+  svg {
+    overflow: visible;
   }
 
   .sizes {
