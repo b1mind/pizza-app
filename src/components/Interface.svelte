@@ -41,7 +41,6 @@
     gsap.to(toppings.children, { duration: 1, scale: 1 })
 
     Draggable.create(toppings.children, {
-      //fixme: svg bounding rec not working ?
       bounds: document.querySelector('[data-pizzaBox]'),
 
       onDrag: function (e) {
@@ -96,31 +95,15 @@
   </svg>
 
   <div data-toppings bind:this={toppings}>
-    <svg width="50" height="50">
-      <rect width="50" height="50" fill="#D3FF77" />
-    </svg>
-    <svg width="50" height="50">
-      <rect width="50" height="50" fill="#D3FF77" />
-    </svg>
-    <svg width="50" height="50">
-      <rect width="50" height="50" fill="#D3FF77" />
-    </svg>
-    <svg width="50" height="50">
-      <rect width="50" height="50" fill="#D3FF77" />
-    </svg>
-  </div>
-
-  <!-- <div data-toppings bind:this={toppings}>
     <Toppings topping="ham" />
-    <Toppings topping="sausage" viewBox="100 0 50 50" />
-    <Toppings viewBox="200 0 50 50" />
-    <Toppings viewBox="300 0 50 50" />
-    <Toppings viewBox="400 0 50 50" />
-    <Toppings viewBox="0 100 50 50" />
-    <Toppings viewBox="0 200 50 50" />
-    <Toppings viewBox="0 300 50 50" />
-    <Toppings viewBox="0 400 50 50" />
-  </div> -->
+    <Toppings topping="pepper" />
+    <Toppings topping="sausage" />
+    <Toppings topping="chicken" />
+    <Toppings topping="pepperoni" />
+    <Toppings topping="onion" />
+    <Toppings topping="tomato" />
+    <Toppings topping="jalapeno" />
+  </div>
 </div>
 
 <style type="text/scss">
@@ -139,6 +122,9 @@
 
   [data-toppings] {
     display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 1rem;
     grid-row: 2;
     grid-column: 2;
   }
